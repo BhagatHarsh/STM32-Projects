@@ -1,0 +1,27 @@
+--cpu Cortex-M0
+"read_input\startup_stm32f070xb.o"
+"read_input\main.o"
+"read_input\stm32f0xx_it.o"
+"read_input\stm32f0xx_hal_msp.o"
+"read_input\stm32f0xx_hal_tim.o"
+"read_input\stm32f0xx_hal_tim_ex.o"
+"read_input\stm32f0xx_hal_uart.o"
+"read_input\stm32f0xx_hal_uart_ex.o"
+"read_input\stm32f0xx_hal_rcc.o"
+"read_input\stm32f0xx_hal_rcc_ex.o"
+"read_input\stm32f0xx_hal.o"
+"read_input\stm32f0xx_hal_i2c.o"
+"read_input\stm32f0xx_hal_i2c_ex.o"
+"read_input\stm32f0xx_hal_gpio.o"
+"read_input\stm32f0xx_hal_dma.o"
+"read_input\stm32f0xx_hal_cortex.o"
+"read_input\stm32f0xx_hal_pwr.o"
+"read_input\stm32f0xx_hal_pwr_ex.o"
+"read_input\stm32f0xx_hal_flash.o"
+"read_input\stm32f0xx_hal_flash_ex.o"
+"read_input\stm32f0xx_hal_exti.o"
+"read_input\system_stm32f0xx.o"
+--strict --scatter "read_input\read_input.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "read_input.map" -o read_input\read_input.axf

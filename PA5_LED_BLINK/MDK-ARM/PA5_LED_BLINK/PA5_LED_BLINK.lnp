@@ -1,0 +1,27 @@
+--cpu Cortex-M0
+"pa5_led_blink\startup_stm32f070xb.o"
+"pa5_led_blink\main.o"
+"pa5_led_blink\stm32f0xx_it.o"
+"pa5_led_blink\stm32f0xx_hal_msp.o"
+"pa5_led_blink\stm32f0xx_hal_tim.o"
+"pa5_led_blink\stm32f0xx_hal_tim_ex.o"
+"pa5_led_blink\stm32f0xx_hal_uart.o"
+"pa5_led_blink\stm32f0xx_hal_uart_ex.o"
+"pa5_led_blink\stm32f0xx_hal_rcc.o"
+"pa5_led_blink\stm32f0xx_hal_rcc_ex.o"
+"pa5_led_blink\stm32f0xx_hal.o"
+"pa5_led_blink\stm32f0xx_hal_i2c.o"
+"pa5_led_blink\stm32f0xx_hal_i2c_ex.o"
+"pa5_led_blink\stm32f0xx_hal_gpio.o"
+"pa5_led_blink\stm32f0xx_hal_dma.o"
+"pa5_led_blink\stm32f0xx_hal_cortex.o"
+"pa5_led_blink\stm32f0xx_hal_pwr.o"
+"pa5_led_blink\stm32f0xx_hal_pwr_ex.o"
+"pa5_led_blink\stm32f0xx_hal_flash.o"
+"pa5_led_blink\stm32f0xx_hal_flash_ex.o"
+"pa5_led_blink\stm32f0xx_hal_exti.o"
+"pa5_led_blink\system_stm32f0xx.o"
+--strict --scatter "PA5_LED_BLINK\PA5_LED_BLINK.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "PA5_LED_BLINK.map" -o PA5_LED_BLINK\PA5_LED_BLINK.axf

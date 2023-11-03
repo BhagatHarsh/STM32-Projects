@@ -1,0 +1,27 @@
+--cpu Cortex-M0
+"time16\startup_stm32f070xb.o"
+"time16\main.o"
+"time16\stm32f0xx_it.o"
+"time16\stm32f0xx_hal_msp.o"
+"time16\stm32f0xx_hal_adc.o"
+"time16\stm32f0xx_hal_adc_ex.o"
+"time16\stm32f0xx_hal_rcc.o"
+"time16\stm32f0xx_hal_rcc_ex.o"
+"time16\stm32f0xx_hal.o"
+"time16\stm32f0xx_hal_i2c.o"
+"time16\stm32f0xx_hal_i2c_ex.o"
+"time16\stm32f0xx_hal_gpio.o"
+"time16\stm32f0xx_hal_dma.o"
+"time16\stm32f0xx_hal_cortex.o"
+"time16\stm32f0xx_hal_pwr.o"
+"time16\stm32f0xx_hal_pwr_ex.o"
+"time16\stm32f0xx_hal_flash.o"
+"time16\stm32f0xx_hal_flash_ex.o"
+"time16\stm32f0xx_hal_exti.o"
+"time16\stm32f0xx_hal_tim.o"
+"time16\stm32f0xx_hal_tim_ex.o"
+"time16\system_stm32f0xx.o"
+--strict --scatter "Time16\Time16.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Time16.map" -o Time16\Time16.axf

@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.38.0.0
 Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Harsh Bhagat, AU, LIC=----
+License Information: Harman Jani, Ahmedabad University, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.38.0.0
@@ -21,17 +21,21 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-C:\Users\habha\Desktop\codingSpace\SchoolCodes\year3\ESD\STM\Projects\ULTRA_PRO\MDK-ARM\ULTRA_PRO.uvprojx
+C:\Users\Admin\Desktop\courses\ECE302_ESD\stm_codes\STM32-Projects\ULTRA_PRO\MDK-ARM\ULTRA_PRO.uvprojx
 Project File Date:  11/03/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'ULTRA_PRO'
+../Core/Src/main.c(137): warning: cast to 'uint8_t *' (aka 'unsigned char *') from smaller integer type 'uint8_t' (aka 'unsigned char') [-Wint-to-pointer-cast]
+                        HAL_UART_Transmit(&huart2,(uint8_t*)val,sizeof(uint8_t), 50);
+                                                  ^~~~~~~~~~~~~
+1 warning generated.
 compiling main.c...
 linking...
-Program Size: Code=7510 RO-data=282 RW-data=16 ZI-data=1992  
+Program Size: Code=8174 RO-data=282 RW-data=20 ZI-data=1988  
 FromELF: creating hex file...
-"ULTRA_PRO\ULTRA_PRO.axf" - 0 Error(s), 0 Warning(s).
+"ULTRA_PRO\ULTRA_PRO.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -48,8 +52,8 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   ./RTE/_ULTRA_PRO
-  C:/Users/habha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
-  C:/Users/habha/AppData/Local/Arm/Packs/Keil/STM32F0xx_DFP/2.1.1/Drivers/CMSIS/Device/ST/STM32F0xx/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/Keil/STM32F0xx_DFP/2.1.1/Drivers/CMSIS/Device/ST/STM32F0xx/Include
 
 <h2>Collection of Component Files used:</h2>
 

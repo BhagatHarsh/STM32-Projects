@@ -18,7 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "stdio.h"
+#include "string.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -70,14 +71,21 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	prevCount = count;
-	if (count>maxCount){
-		maxCount=count;
-	}
-	
-	_oneSecondFlag = 1;
-	count=0;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (count > maxCount)
+  {
+    maxCount = count;
+  }
+  
+  // Convert the ADC value to a string
+  char buffer_str[10];
+  sprintf(buffer_str, "%u\n", buffer); // Assuming 'buffer' is a uint16_t
+
+  // Transmit the data via USART
+  HAL_UART_Transmit(&huart2, (uint8_t*)buffer_str, strlen(buffer_str), 1000);
+  
+  count = 0;
 }
 
 /* USER CODE END 0 */
@@ -126,7 +134,7 @@ HAL_TIM_Base_Start_IT(&htim16);
 
     /* USER CODE BEGIN 3 */
 		if(_oneSecondFlag == 1){
-			HAL_UART_Transmit(&huart2,(uint8_t*) count,sizeof(uint16_t), 50);
+			HAL_UART_Transmit(&huart2,(uint8_t*)val,sizeof(uint8_t), 50);
 			_oneSecondFlag = 0;
 		}
 
@@ -281,7 +289,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 38400;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

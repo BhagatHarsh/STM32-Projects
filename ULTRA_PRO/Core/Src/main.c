@@ -18,11 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stdio.h"
-#include "string.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +54,7 @@ uint16_t buffer;
 int count = 0, maxCount = -1, prevCount = 0;
 uint8_t val = 100;
 uint8_t _oneSecondFlag = 0;
+char max_buffer[1000];
 
 /* USER CODE END PV */
 
@@ -73,20 +74,19 @@ static void MX_USART2_UART_Init(void);
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	
+	prevCount = count;
   if (count > maxCount)
   {
     maxCount = count;
   }
-  
-  // Convert the ADC value to a string
-  char buffer_str[10];
-  sprintf(buffer_str, "%u\n", buffer); // Assuming 'buffer' is a uint16_t
 
   // Transmit the data via USART
-  HAL_UART_Transmit(&huart2, (uint8_t*)buffer_str, strlen(buffer_str), 1000);
+  HAL_UART_Transmit(&huart2, (uint8_t*)max_buffer, strlen(max_buffer), 1000);
   
   count = 0;
 }
+
 
 /* USER CODE END 0 */
 
@@ -128,22 +128,32 @@ HAL_TIM_Base_Start_IT(&htim16);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+while (1)
+{
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		if(_oneSecondFlag == 1){
-			HAL_UART_Transmit(&huart2,(uint8_t*)val,sizeof(uint8_t), 50);
-			_oneSecondFlag = 0;
-		}
+    if(_oneSecondFlag == 1){
+        _oneSecondFlag = 0;
+    }
 
-		HAL_ADC_Start(&hadc);
-		HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
-		buffer = HAL_ADC_GetValue(&hadc);
+    HAL_ADC_Start(&hadc);
+    HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
+    buffer = HAL_ADC_GetValue(&hadc);
+    
+    // Convert the ADC value to a string
+    char buffer_str[10];
+    sprintf(buffer_str, "%u ", buffer); // Assuming 'buffer' is a uint16_t
+
 		count++;
 		
-  }
+    // Check if appending buffer_str would overflow max_buffer
+    if(strlen(max_buffer) + strlen(buffer_str) < 500) {
+        // Append the buffer_str to max_buffer
+        strcat(max_buffer, buffer_str);
+    }
+}
+
   /* USER CODE END 3 */
 }
 
@@ -166,7 +176,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSI14CalibrationValue = 16;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL2;
   RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV1;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -178,10 +188,10 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV8;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -257,7 +267,7 @@ static void MX_TIM16_Init(void)
 
   /* USER CODE END TIM16_Init 1 */
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 48000-1;
+  htim16.Init.Prescaler = 2000-1;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim16.Init.Period = 1000-1;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

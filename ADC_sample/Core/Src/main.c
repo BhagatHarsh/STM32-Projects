@@ -61,9 +61,9 @@ static void MX_ADC_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-__weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-	 //adc_value = HAL_ADC_GetValue(hadc);
+	  // adc_value = HAL_ADC_GetValue(hadc);
 		adc_value = buffer;
 		voltage = (adc_value/4095.0)*(3.3);
 		HAL_ADC_Start_DMA(hadc, &buffer, 1);

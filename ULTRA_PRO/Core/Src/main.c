@@ -83,7 +83,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   // Transmit the data via USART
   HAL_UART_Transmit(&huart2, (uint8_t*)max_buffer, strlen(max_buffer), 1000);
-  
+  memset(max_buffer, '\0', sizeof(max_buffer));
   count = 0;
 }
 

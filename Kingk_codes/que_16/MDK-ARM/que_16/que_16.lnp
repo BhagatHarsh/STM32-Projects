@@ -1,0 +1,27 @@
+--cpu Cortex-M0
+"que_16\startup_stm32f070xb.o"
+"que_16\main.o"
+"que_16\stm32f0xx_it.o"
+"que_16\stm32f0xx_hal_msp.o"
+"que_16\stm32f0xx_hal_tim.o"
+"que_16\stm32f0xx_hal_tim_ex.o"
+"que_16\stm32f0xx_hal_uart.o"
+"que_16\stm32f0xx_hal_uart_ex.o"
+"que_16\stm32f0xx_hal_rcc.o"
+"que_16\stm32f0xx_hal_rcc_ex.o"
+"que_16\stm32f0xx_hal.o"
+"que_16\stm32f0xx_hal_i2c.o"
+"que_16\stm32f0xx_hal_i2c_ex.o"
+"que_16\stm32f0xx_hal_gpio.o"
+"que_16\stm32f0xx_hal_dma.o"
+"que_16\stm32f0xx_hal_cortex.o"
+"que_16\stm32f0xx_hal_pwr.o"
+"que_16\stm32f0xx_hal_pwr_ex.o"
+"que_16\stm32f0xx_hal_flash.o"
+"que_16\stm32f0xx_hal_flash_ex.o"
+"que_16\stm32f0xx_hal_exti.o"
+"que_16\system_stm32f0xx.o"
+--strict --scatter "que_16\que_16.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "que_16.map" -o que_16\que_16.axf
